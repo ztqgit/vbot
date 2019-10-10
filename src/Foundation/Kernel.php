@@ -67,9 +67,9 @@ class Kernel
     private function bootstrapException()
     {
         error_reporting(-1);
-        set_error_handler([$this->vbot->exception, 'handleError']);
-        set_exception_handler([$this->vbot->exception, 'handleException']);
-        register_shutdown_function([$this->vbot->exception, 'handleShutdown']);
+//        set_error_handler([$this->vbot->exception, 'handleError']);
+//        set_exception_handler([$this->vbot->exception, 'handleException']);
+//        register_shutdown_function([$this->vbot->exception, 'handleShutdown']);
     }
 
     /**

@@ -14,6 +14,7 @@ use Hanson\Vbot\Message\Mina;
 use Hanson\Vbot\Message\Official;
 use Hanson\Vbot\Message\Share;
 use Hanson\Vbot\Support\Content;
+use Illuminate\Support\Str;
 
 class ShareFactory
 {
@@ -51,7 +52,7 @@ class ShareFactory
 
     private function parse($xml)
     {
-        if (starts_with($xml, '@')) {
+        if (Str::startsWith($xml, '@')) {
             $xml = preg_replace('/(@\S+:\\n)/', '', $xml);
         }
 

@@ -5,6 +5,7 @@ namespace Hanson\Vbot\Contact;
 use Hanson\Vbot\Foundation\Vbot;
 use Hanson\Vbot\Support\Content;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class Contacts extends Collection
 {
@@ -67,7 +68,7 @@ class Contacts extends Collection
                 return false;
             }
 
-            if ($blur && str_contains($item[$key], $search)) {
+            if ($blur && Str::contains($item[$key], $search)) {
                 return true;
             } elseif (!$blur && $item[$key] === $search) {
                 return true;
@@ -102,7 +103,7 @@ class Contacts extends Collection
      */
     public function getAccount($username)
     {
-        if (starts_with($username, '@@')) {
+        if (Str::startsWith($username, '@@')) {
             return $this->vbot->groups->get($username);
         } else {
             $account = $this->vbot->friends->get($username, null);

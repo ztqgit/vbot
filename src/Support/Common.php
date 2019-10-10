@@ -1,6 +1,7 @@
 <?php
 
 namespace Hanson\Vbot\Support;
+use Illuminate\Support\Str;
 
 /**
  * Common 公共处理类.
@@ -64,13 +65,13 @@ class Common
             $memberAttrsMatch = true;
 
             //群昵称匹配
-            if (str_contains($group['NickName'], $nickName)) {
+            if (Str::contains($group['NickName'], $nickName)) {
                 $nickNameMatch = true;
             }
 
             //拼音标识匹配
             if ('' != $PYInitial) {
-                if (str_contains($group['PYInitial'], $PYInitial)) {
+                if (Str::contains($group['PYInitial'], $PYInitial)) {
                     $PYInitialMatch = true;
                 }
             } else {
@@ -157,13 +158,13 @@ class Common
             $memberAttrMatch = false;
 
             //昵称匹配
-            if (str_contains($friend['NickName'], $nickName)) {
+            if (Str::contains($friend['NickName'], $nickName)) {
                 $nickNameMatch = true;
             }
 
             //拼音标识匹配
             if ('' != $PYInitial) {
-                if (str_contains($friend['PYInitial'], $PYInitial)) {
+                if (Str::contains($friend['PYInitial'], $PYInitial)) {
                     $PYInitialMatch = true;
                 }
             } else {

@@ -9,6 +9,7 @@
 namespace Hanson\Vbot\Contact;
 
 use Hanson\Vbot\Exceptions\CreateGroupException;
+use Illuminate\Support\Str;
 
 class Groups extends Contacts
 {
@@ -80,7 +81,7 @@ class Groups extends Contacts
         $result = [];
 
         foreach ($group['MemberList'] as $member) {
-            if ($blur && str_contains($member['NickName'], $memberNickname)) {
+            if ($blur && Str::contains($member['NickName'], $memberNickname)) {
                 $result[] = $member;
             } elseif (!$blur && $member['NickName'] === $memberNickname) {
                 $result[] = $member;

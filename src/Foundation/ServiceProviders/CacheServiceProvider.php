@@ -8,6 +8,7 @@ use Illuminate\Cache\CacheManager;
 use Illuminate\Cache\MemcachedConnector;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Redis\RedisManager;
+use Illuminate\Support\Arr;
 
 class CacheServiceProvider implements ServiceProviderInterface
 {
@@ -26,8 +27,7 @@ class CacheServiceProvider implements ServiceProviderInterface
         });
         $vbot->singleton('redis', function ($vbot) {
             $config = $vbot->config['database.redis'];
-
-            return new RedisManager(array_get($config, 'client', 'predis'), $config);
+            return new RedisManager(Arr::get($config, 'client', 'predis'), $config);
         });
         $vbot->bind('redis.connection', function ($vbot) {
             return $vbot['redis']->connection();

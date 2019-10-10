@@ -8,6 +8,8 @@
 
 namespace Hanson\Vbot\Message;
 
+use Illuminate\Support\Str;
+
 class GroupChange extends Message implements MessageInterface
 {
     const TYPE = 'group_change';
@@ -25,9 +27,9 @@ class GroupChange extends Message implements MessageInterface
 
     protected function afterCreate()
     {
-        if (str_contains($this->message, '邀请你')) {
+        if (Str::contains($this->message, '邀请你')) {
             $this->action = 'INVITE';
-        } elseif (str_contains($this->message, '加入了群聊') || str_contains($this->message, '分享的二维码加入群聊')) {
+        } elseif (Str::contains($this->message, '加入了群聊') || Str::contains($this->message, '分享的二维码加入群聊')) {
             $isMatch = preg_match('/"?([^"]*)"?邀请"(.+)"加入了群聊/', $this->message, $match);
             if ($isMatch) {
                 $this->inviter = $match[1];
@@ -38,11 +40,11 @@ class GroupChange extends Message implements MessageInterface
                 $this->invited = $match[1];
             }
             $this->action = 'ADD';
-        } elseif (str_contains($this->message, '移出了群聊')) {
+        } elseif (Str::contains($this->message, '移出了群聊')) {
             $this->action = 'REMOVE';
-        } elseif (str_contains($this->message, '改群名为')) {
+        } elseif (Str::contains($this->message, '改群名为')) {
             $this->action = 'RENAME';
-        } elseif (str_contains($this->message, '移出群聊')) {
+        } elseif (Str::contains($this->message, '移出群聊')) {
             $this->action = 'BE_REMOVE';
         }
     }

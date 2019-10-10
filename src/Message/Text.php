@@ -9,6 +9,7 @@
 namespace Hanson\Vbot\Message;
 
 use Hanson\Vbot\Message\Traits\SendAble;
+use Illuminate\Support\Str;
 
 class Text extends Message implements MessageInterface
 {
@@ -28,7 +29,7 @@ class Text extends Message implements MessageInterface
 
     protected function afterCreate()
     {
-        $this->isAt = str_contains($this->message, '@'.vbot('myself')->nickname);
+        $this->isAt = Str::contains($this->message, '@'.vbot('myself')->nickname);
         $this->pure = $this->pureText();
     }
 

@@ -8,6 +8,8 @@
 
 namespace Hanson\Vbot\Message;
 
+use Illuminate\Support\Str;
+
 class Location extends Message implements MessageInterface
 {
     const TYPE = 'location';
@@ -21,7 +23,7 @@ class Location extends Message implements MessageInterface
      */
     public static function isLocation($content)
     {
-        return str_contains($content['Content'], 'webwxgetpubliclinkimg') && $content['Url'];
+        return Str::contains($content['Content'], 'webwxgetpubliclinkimg') && $content['Url'];
     }
 
     private function locationUrl()

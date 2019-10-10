@@ -4,6 +4,7 @@ namespace Hanson\Vbot\Console;
 
 use Carbon\Carbon;
 use Hanson\Vbot\Foundation\Vbot;
+use Illuminate\Support\Arr;
 use Monolog\Logger;
 
 class Console
@@ -66,13 +67,13 @@ class Console
      */
     public function message($str)
     {
-        if (array_get($this->config, 'message', true)) {
+        if (Arr::get($this->config, 'message', true)) {
             $this->log($str, self::MESSAGE);
         }
     }
 
     public function isOutput()
     {
-        return array_get($this->config, 'output', true);
+        return Arr::get($this->config, 'output', true);
     }
 }

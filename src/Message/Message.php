@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Hanson\Vbot\Foundation\Vbot;
 use Hanson\Vbot\Support\Content;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 abstract class Message
 {
@@ -29,12 +30,12 @@ abstract class Message
     public $from;
 
     /**
-     * @var array 当from为群组时，sender为用户发送�
+     * @var array 当from为群组时，sender为用户发送�
      */
     public $sender = null;
 
     /**
-     * 发送�
+     * 发送�
      * username.
      *
      * @var
@@ -42,9 +43,9 @@ abstract class Message
     public $username;
 
     /**
-     * @var string 经处理的�
-     *             容 （与类型无�
-     *             � 有可能是一串xml）
+     * @var string 经处理的�
+     *             容 （与类型无�
+     *             � 有可能是一串xml）
      */
     public $message;
 
@@ -54,7 +55,7 @@ abstract class Message
     public $time;
 
     /**
-     * @var string 消息发送�
+     * @var string 消息发送�
      *             类型
      */
     public $fromType;
@@ -79,7 +80,7 @@ abstract class Message
     }
 
     /**
-     * 设置消息发送�
+     * 设置消息发送�
      * .
      */
     private function setFrom()
@@ -122,14 +123,14 @@ abstract class Message
     }
 
     /**
-     * 处理群发消息的�
+     * 处理群发消息的�
      * 容.
      */
     private function handleGroupContent()
     {
         $content = $this->message;
 
-        if (!$content || !str_contains($content, ":\n")) {
+        if (!$content || !Str::contains($content, ":\n")) {
             return;
         }
 

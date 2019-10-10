@@ -5,6 +5,7 @@ namespace Hanson\Vbot\Extension;
 use Hanson\Vbot\Exceptions\ExtensionException;
 use Hanson\Vbot\Message\Text;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 abstract class AbstractMessageHandler
 {
@@ -67,7 +68,7 @@ abstract class AbstractMessageHandler
     final public function messageHandler(Collection $collection)
     {
         if ($collection['type'] === 'text' && $this->isAdmin($collection['username'])) {
-            if (starts_with($collection['content'], $this->name.' ')) {
+            if (Str::startsWith($collection['content'], $this->name.' ')) {
                 $content = str_replace($this->name.' ', '', $collection['content']);
 
                 switch ($content) {

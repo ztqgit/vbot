@@ -18,6 +18,7 @@ use Hanson\Vbot\Message\Transfer;
 use Hanson\Vbot\Message\Video;
 use Hanson\Vbot\Message\Voice;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class MessageFactory
 {
@@ -47,7 +48,7 @@ class MessageFactory
             case 1: //文本消息
                 if (Location::isLocation($msg)) {
                     return (new Location())->make($msg);
-                } elseif ($this->vbot->friends->get($msg['FromUserName']) && str_contains($msg['Content'], '过了你的朋友验证请求')) {
+                } elseif ($this->vbot->friends->get($msg['FromUserName']) && Str::contains($msg['Content'], '过了你的朋友验证请求')) {
                     return (new NewFriend())->make($msg);
                 } else {
                     return (new Text())->make($msg);
@@ -63,12 +64,12 @@ class MessageFactory
             case 10002:
                 return (new Recall())->make($msg);
             case 10000:
-                if (str_contains($msg['Content'], '利是') || str_contains($msg['Content'], '红包')) {
+                if (Str::contains($msg['Content'], '利是') || Str::contains($msg['Content'], '红包')) {
                     return (new RedPacket())->make($msg);
-                } elseif (str_contains($msg['Content'], '添加') || str_contains($msg['Content'], '打招呼')) {
+                } elseif (Str::contains($msg['Content'], '添加') || Str::contains($msg['Content'], '打招呼')) {
                     // 添加好友
                     return (new NewFriend())->make($msg);
-                } elseif (str_contains($msg['Content'], '加入了群聊') || str_contains($msg['Content'], '移出了群聊') || str_contains($msg['Content'], '改群名为') || str_contains($msg['Content'], '移出群聊') || str_contains($msg['Content'], '邀请你') || str_contains($msg['Content'], '分享的二维码加入群聊')) {
+                } elseif (Str::contains($msg['Content'], '加入了群聊') || Str::contains($msg['Content'], '移出了群聊') || Str::contains($msg['Content'], '改群名为') || Str::contains($msg['Content'], '移出群聊') || Str::contains($msg['Content'], '邀请你') || Str::contains($msg['Content'], '分享的二维码加入群聊')) {
                     return (new GroupChange())->make($msg);
                 }
                 break;
@@ -77,7 +78,7 @@ class MessageFactory
                     return (new Transfer())->make($msg);
                 } elseif ($msg['FileName'] === '我发起了位置共享') {
                     return (new Location())->make($msg);
-                } elseif (str_contains($msg['Content'], '该类型暂不支持，请在手机上查看')) {
+                } elseif (Str::contains($msg['Content'], '该类型暂不支持，请在手机上查看')) {
                     return;
                 } else {
                     return $this->vbot->shareFactory->make($msg);
