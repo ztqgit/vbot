@@ -20,7 +20,7 @@
         "guzzlehttp/guzzle": "^6.2",
         "nesbot/carbon": "^1.21|2.*",
         "symfony/console": "3.*|4.*",
-        "monolog/monolog": "^1.22",
+        "monolog/monolog": "^1.22|2.*",
         "aferrandini/phpqrcode": "^1.0",
         "illuminate/config": "^5.4|6.*",
         "illuminate/cache": "^5.4|6.*",
